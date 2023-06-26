@@ -1,27 +1,35 @@
 /* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  KeyboardAvoidingView,
+} from 'react-native';
 import {Box, Input, Button} from 'native-base';
+import {fetchCurrentData} from '../api';
 
-const Main = () => {
+const MainScreen = ({navigation}) => {
   const [city, setCity] = useState('');
-  const handleChange = () => setCity(city);
+  const handleChange = cityname => {
+    setCity(cityname);
+  };
 
   // loading state
   const [loading, setloading] = useState(false);
 
   // Function logic to execute on button press
   const handlePress = () => {
+   
+    fetchCurrentData()
 
-    setloading(true);
-    setTimeout(() => {
-      setloading(false);
-    }, 600);
+
+    navigation.navigate('Weather Details');
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Weather Dashboard</Text>
+    <KeyboardAvoidingView style={styles.container}>
       <Image
         source={require('../assets/weather-icon.png')}
         style={styles.image}
@@ -42,12 +50,15 @@ const Main = () => {
             onPress={handlePress}
           />
         ) : (
-          <Button spinnerPlacement="start" style={styles.button}  onPress={handlePress}>
+          <Button
+            spinnerPlacement="start"
+            style={styles.button}
+            onPress={handlePress}>
             Let's Go
           </Button>
         )}
       </Box>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -56,6 +67,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
+    backgroundColor: '#FFFFFF',
   },
   text: {
     fontSize: 20,
@@ -80,4 +92,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Main;
+export default MainScreen;

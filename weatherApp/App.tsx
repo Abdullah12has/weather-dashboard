@@ -1,15 +1,37 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native';
 import {NativeBaseProvider} from 'native-base';
-import Main from './screens/Main';
+import MainScreen from './screens/MainScreen';
+import WeatherDetailScreen from './screens/WeatherDetailScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <NativeBaseProvider>
-        <Main />
-      </NativeBaseProvider>
-    </SafeAreaView>
+    <NavigationContainer>
+      <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
+        <NativeBaseProvider>
+          <Stack.Navigator
+          // screenOptions={{
+          //   headerShown: false,
+          // }}
+          >
+            <Stack.Screen name="Search City" component={MainScreen} />
+            <Stack.Screen
+              name="Weather Details"
+              component={WeatherDetailScreen}
+              options={{
+                headerStyle: {
+                  backgroundColor: 'lightblue',
+                },
+              }}
+            />
+          </Stack.Navigator>
+        </NativeBaseProvider>
+      </SafeAreaView>
+    </NavigationContainer>
   );
 }
 
