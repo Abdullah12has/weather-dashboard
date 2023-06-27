@@ -4,6 +4,7 @@ import {View, Text, StyleSheet, Image, SafeAreaView} from 'react-native';
 import {Box, Input, Button} from 'native-base';
 import {useRoute} from '@react-navigation/native';
 
+
 const WeatherDetailScreen = () => {
   const route = useRoute();
   const {currentData} = route.params;
@@ -20,6 +21,7 @@ const WeatherDetailScreen = () => {
         <Text style={styles.temperature}>32°</Text>
         <Text style={styles.description}>Partly Cloudy</Text>
         <Text style={styles.city}>Islamabad</Text>
+
         </View>
         
         <Image
