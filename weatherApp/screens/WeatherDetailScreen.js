@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Image, SafeAreaView} from 'react-native';
 import {Box, Input, Button} from 'native-base';
 import {useRoute} from '@react-navigation/native';
-
+import {Icon} from '@rneui/themed';
 
 const WeatherDetailScreen = () => {
   const route = useRoute();
@@ -15,21 +15,19 @@ const WeatherDetailScreen = () => {
 
   return (
     <SafeAreaView style={styles.safearea}>
-    <View style={styles.container}>
-      <View style={styles.containerTop}>
-        <View style={styles.containerLeft}>
-        <Text style={styles.temperature}>32°</Text>
-        <Text style={styles.description}>Partly Cloudy</Text>
-        <Text style={styles.city}>Islamabad</Text>
+      <View style={styles.container}>
+        <View style={styles.containerTop}>
+          <View style={styles.containerLeft}>
+            <Text style={styles.temperature}>32°</Text>
+            <Text style={styles.description}>Partly Cloudy</Text>
+            <Text style={styles.city}>Islamabad</Text>
+            <Text style={styles.feelsLike}>Feels Like 32°</Text>
+            <Icon name="rowing" />
+          </View>
 
+          <Image source={require('../assets/clear.png')} style={styles.image} />
         </View>
-        
-        <Image
-        source={require('../assets/clear.png')}
-        style={styles.image}
-      />
       </View>
-    </View>
     </SafeAreaView>
   );
 };
@@ -37,33 +35,24 @@ const WeatherDetailScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'flex-start',
-    // alignItems: 'left',
+
     backgroundColor: '#45b6fe',
   },
-  containerTop:{
-    // flex:1,
-    flexDirection:'row',
-    justifyContent:'left',
-    
-    // backgroundColor:'red',
-    
-
+  containerTop: {
+    flexDirection: 'row',
+    justifyContent: 'left',
   },
-  containerLeft:{
-
-    paddingLeft:'8%',
-    paddingTop:'7%'
+  containerLeft: {
+    paddingLeft: '8%',
+    paddingTop: '7%',
   },
   temperature: {
     fontSize: 70,
     color: 'white',
-  
   },
-  description:{
+  description: {
     fontSize: 19,
     color: 'white',
-
   },
 
   box: {
@@ -76,19 +65,23 @@ const styles = StyleSheet.create({
     height: 130,
     resizeMode: 'stretch',
     marginVertical: '5%',
-    marginLeft:'23%'
+    marginLeft: '23%',
   },
   button: {
     width: '77%',
     justifyContent: 'center',
     marginTop: '90%',
   },
-  safearea:{flex: 1, backgroundColor: '#45b6fe'},
-  city:{
+  safearea: {flex: 1, backgroundColor: '#45b6fe'},
+  city: {
     fontSize: 16,
     color: 'white',
-    marginTop:25
-  }
+    marginTop: 25,
+  },
+  feelsLike: {
+    fontSize: 13,
+    color: 'white',
+  },
 });
 
 export default WeatherDetailScreen;
