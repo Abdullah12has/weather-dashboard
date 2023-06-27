@@ -7,8 +7,10 @@ import {
   Image,
   KeyboardAvoidingView,
 } from 'react-native';
-import {Box, Input, Button} from 'native-base';
-import {fetchCurrentData} from '../api';
+import {Box, Input, Button, TextArea} from 'native-base';
+import {fetchForecast, fetchCurrentData} from '../api';
+import axios from 'axios';
+import {API_KEY} from '@env';
 
 const MainScreen = ({navigation}) => {
   const [city, setCity] = useState('');
@@ -19,13 +21,32 @@ const MainScreen = ({navigation}) => {
   // loading state
   const [loading, setloading] = useState(false);
 
-  // Function logic to execute on button press
-  const handlePress = () => {
-   
-    fetchCurrentData()
+  // state to store weather data
+  const [currentData, setCurrentData] = useState({});
+  const [forecast, setForecast] = useState({});
 
+  // handle button press
+  const handlePress = async city => {
+    setloading(true);
 
-    navigation.navigate('Weather Details');
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`,
+      );
+
+      // d is response data
+      const d = response.data;
+      setCurrentData(d);
+      console.log(response.status);
+
+      if (response.status === 200) {
+        navigation.navigate('Weather Details', {data: currentData});
+      }
+    } catch (error) {
+      console.error('Error occurred while fetching weather data:', error);
+    }
+
+    setloading(false);
   };
 
   return (
@@ -47,13 +68,17 @@ const MainScreen = ({navigation}) => {
             isLoading
             spinnerPlacement="start"
             style={styles.button}
-            onPress={handlePress}
+            onPress={() => {
+              handlePress(city);
+            }}
           />
         ) : (
           <Button
             spinnerPlacement="start"
             style={styles.button}
-            onPress={handlePress}>
+            onPress={() => {
+              handlePress(city);
+            }}>
             Let's Go
           </Button>
         )}
