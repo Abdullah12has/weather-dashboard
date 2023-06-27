@@ -11,26 +11,25 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
-        <NativeBaseProvider>
-          <Stack.Navigator
-          // screenOptions={{
-          //   headerShown: false,
-          // }}
-          >
-            <Stack.Screen name="Search City" component={MainScreen} />
-            <Stack.Screen
-              name="Weather Details"
-              component={WeatherDetailScreen}
-              options={{
-                headerStyle: {
-                  backgroundColor: 'lightblue',
-                },
-              }}
-            />
-          </Stack.Navigator>
-        </NativeBaseProvider>
-      </SafeAreaView>
+      {/* <SafeAreaView style={{flex: 1, backgroundColor: '#45b6fe'}}> */}
+      <NativeBaseProvider>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name="Search City" component={MainScreen} />
+          <Stack.Screen
+            name="Weather Details"
+            component={WeatherDetailScreen}
+            options={{
+              headerStyle: {
+                backgroundColor: '#45b6fe',
+              },
+            }}
+          />
+        </Stack.Navigator>
+      </NativeBaseProvider>
+      {/* </SafeAreaView> */}
     </NavigationContainer>
   );
 }

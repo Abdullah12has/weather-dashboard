@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   KeyboardAvoidingView,
+  SafeAreaView
 } from 'react-native';
 import {Box, Input, Button, TextArea} from 'native-base';
 import {fetchForecast, fetchCurrentData} from '../api';
@@ -24,6 +25,8 @@ const MainScreen = ({navigation}) => {
   // state to store weather data
   const [currentData, setCurrentData] = useState({});
   const [forecast, setForecast] = useState({});
+  //error message
+  const [errorMessage, setErrorMessage] = useState('');
 
   // handle button press
   const handlePress = async city => {
@@ -37,57 +40,62 @@ const MainScreen = ({navigation}) => {
       // d is response data
       const d = response.data;
       setCurrentData(d);
-      console.log(response.status);
 
       if (response.status === 200) {
-        navigation.navigate('Weather Details', {data: currentData});
+        navigation.navigate('Weather Details', {currentData: currentData});
+        setErrorMessage('');
       }
     } catch (error) {
-      console.error('Error occurred while fetching weather data:', error);
+      setErrorMessage(`Please enter a correct city!`);
     }
 
     setloading(false);
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container}>
-      <Image
-        source={require('../assets/weather-icon.png')}
-        style={styles.image}
-      />
-      <Box style={styles.box} alignItems="center">
-        <Input
-          value={city}
-          w="80%"
-          onChangeText={handleChange}
-          placeholder="Enter City Name"
+    <SafeAreaView style={styles.safearea}>
+      <KeyboardAvoidingView style={styles.container}>
+        <Image
+          source={require('../assets/weather-icon.png')}
+          style={styles.image}
         />
-
-        {loading === true ? (
-          <Button
-            isLoading
-            spinnerPlacement="start"
-            style={styles.button}
-            onPress={() => {
-              handlePress(city);
-            }}
+        <Box style={styles.box} alignItems="center">
+          <Input
+            value={city}
+            w="80%"
+            onChangeText={handleChange}
+            placeholder="Enter City Name"
           />
-        ) : (
-          <Button
-            spinnerPlacement="start"
-            style={styles.button}
-            onPress={() => {
-              handlePress(city);
-            }}>
-            Let's Go
-          </Button>
-        )}
-      </Box>
-    </KeyboardAvoidingView>
+          <Text style={styles.error}>{errorMessage}</Text>
+
+          {loading === true ? (
+            <Button
+              isLoading
+              spinnerPlacement="start"
+              style={styles.button}
+              onPress={() => {
+                handlePress(city);
+              }}
+            />
+          ) : (
+            <Button
+              spinnerPlacement="start"
+              style={styles.button}
+              onPress={() => {
+                handlePress(city);
+              }}>
+              Let's Go
+            </Button>
+          )}
+        </Box>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safearea:{flex: 1, backgroundColor: '#FFFFFF'},
+
   container: {
     flex: 1,
     justifyContent: 'flex-start',
@@ -114,6 +122,12 @@ const styles = StyleSheet.create({
     width: '77%',
     justifyContent: 'center',
     marginTop: '90%',
+  },
+  error: {
+    color: 'red',
+    fontWeight: 'bold',
+    fontSize: 12,
+    marginVertical: '2%',
   },
 });
 
