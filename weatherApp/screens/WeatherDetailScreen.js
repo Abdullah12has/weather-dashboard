@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Image, SafeAreaView} from 'react-native';
 import {Box, Input, Button} from 'native-base';
 import {useRoute} from '@react-navigation/native';
+import WeatherModal from '../components/WeatherModal';
 
 const WeatherDetailScreen = () => {
   const route = useRoute();
@@ -17,7 +18,7 @@ const WeatherDetailScreen = () => {
       <View style={styles.container}>
         <View style={styles.containerTop}>
           <View style={styles.containerLeft}>
-            <Text style={styles.temperature}>32°</Text>
+            <Text style={styles.temperature}>°</Text>
             <Text style={styles.description}>Partly Cloudy</Text>
             <Text style={styles.city}>Islamabad</Text>
             <Text style={styles.feelsLike}>32°/ 32° Feels like 32°</Text>
@@ -25,7 +26,7 @@ const WeatherDetailScreen = () => {
 
           <Image source={require('../assets/clear.png')} style={styles.image} />
         </View>
-        <Text>asasas</Text>
+        <WeatherModal />
       </View>
     </SafeAreaView>
   );
