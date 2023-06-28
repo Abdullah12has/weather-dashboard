@@ -17,9 +17,9 @@ function App() {
           screenOptions={{
             headerShown: false,
           }}>
-          <Stack.Screen name="Search City" component={MainScreen} />
+          <Stack.Screen name="Search" component={MainScreen} />
           <Stack.Screen
-            name="Weather Details"
+            name="Weather"
             component={WeatherDetailScreen}
             options={{
               headerStyle: {

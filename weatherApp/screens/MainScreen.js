@@ -42,7 +42,7 @@ const MainScreen = ({navigation}) => {
       setCurrentData(d);
 
       if (response.status === 200) {
-        navigation.navigate('Weather Details', {currentData: currentData});
+        navigation.navigate('Weather', {currentData: d});
         setErrorMessage('');
       }
     } catch (error) {
