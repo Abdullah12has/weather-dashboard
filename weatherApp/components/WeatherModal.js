@@ -4,6 +4,8 @@ import {Box, Input, Button, Center} from 'native-base';
 import WeatherFeature from './WeatherFeature';
 import assets from '../assets';
 
+
+// this is a container for the weather info
 const WeatherModal = ({low, high, humidity, wind, description}) => {
   return (
     <View style={styles.container}>
@@ -11,6 +13,9 @@ const WeatherModal = ({low, high, humidity, wind, description}) => {
         {description}. Low {low}°C.
       </Text>
       <View style={styles.line} />
+
+
+
 
       <WeatherFeature
         iconName={assets.wet}
@@ -20,12 +25,18 @@ const WeatherModal = ({low, high, humidity, wind, description}) => {
       <WeatherFeature
         iconName={assets.wind}
         name={'Wind Speed'}
-        value={`${wind} Km/h`}
+        value={`${wind} m/s`}
       />
       <WeatherFeature
         iconName={assets.temperature}
         name={'Max Temperature'}
         value={`${high}°C`}
+      />
+
+      <WeatherFeature
+        iconName={assets.low}
+        name={'Min Temperature'}
+        value={`${low}°C`}
       />
     </View>
   );
@@ -36,7 +47,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#28A4F4',
     width: '94%',
     marginTop: '10%',
-    height: '30%',
+    height: '58%',
     alignSelf: 'center',
     borderRadius: 20,
   },
@@ -53,7 +64,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.17,
     width: '90%',
     alignSelf: 'center',
-    marginBottom: '3%',
+    marginBottom: '6%',
   },
   icon: {
     width: 25,

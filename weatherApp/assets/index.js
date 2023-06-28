@@ -1,3 +1,6 @@
+
+
+// To export all the assets with their short names. It's easier to call them
 export default {
     clear: require("./clear.png"),
     heavySnow: require("./heavySnow.png"),
@@ -9,5 +12,6 @@ export default {
     thunderstorm: require("./thunderstorm.png"),
     wet: require("./wet.png"),
     wind: require("./wind.png"),
+    low: require("./low.png"),
   };
   

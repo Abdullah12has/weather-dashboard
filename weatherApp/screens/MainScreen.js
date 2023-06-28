@@ -1,17 +1,20 @@
 /* eslint-disable prettier/prettier */
-import React, {useState} from 'react';
+
+
+// This is the main screen where you add the name of the city and search
+import React, {useEffect, useState} from 'react';
 import {
-  View,
   Text,
   StyleSheet,
   Image,
   KeyboardAvoidingView,
-  SafeAreaView
+  SafeAreaView,
 } from 'react-native';
-import {Box, Input, Button, TextArea} from 'native-base';
+import {Box, Input, Button} from 'native-base';
 import {fetchForecast, fetchCurrentData} from '../api';
 import axios from 'axios';
-import {API_KEY} from '@env';
+import {API_KEY, API} from '@env';
+import assets from '../assets';
 
 const MainScreen = ({navigation}) => {
   const [city, setCity] = useState('');
@@ -34,35 +37,35 @@ const MainScreen = ({navigation}) => {
 
     try {
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`,
+        API + `weather?q=${city}&appid=${API_KEY}&units=metric`,
       );
 
       // d is response data
       const d = response.data;
       setCurrentData(d);
 
+      // checking status of response, if it's correct, we have a valid city so we move to the next screen
       if (response.status === 200) {
         navigation.navigate('Weather', {currentData: d});
         setErrorMessage('');
       }
     } catch (error) {
+      // Error message
       setErrorMessage(`Please enter a correct city!`);
     }
-
+// loading spinner turned off
     setloading(false);
   };
 
   return (
     <SafeAreaView style={styles.safearea}>
       <KeyboardAvoidingView style={styles.container}>
-        <Image
-          source={require('../assets/weather-icon.png')}
-          style={styles.image}
-        />
+        <Image source={assets.thunder} style={styles.image} />
         <Box style={styles.box} alignItems="center">
           <Input
             value={city}
             w="80%"
+            variant="rounded"
             onChangeText={handleChange}
             placeholder="Enter City Name"
           />
@@ -71,6 +74,7 @@ const MainScreen = ({navigation}) => {
           {loading === true ? (
             <Button
               isLoading
+              colorScheme="secondary"
               spinnerPlacement="start"
               style={styles.button}
               onPress={() => {
@@ -94,7 +98,7 @@ const MainScreen = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  safearea:{flex: 1, backgroundColor: '#FFFFFF'},
+  safearea: {flex: 1, backgroundColor: '#FFFFFF'},
 
   container: {
     flex: 1,
@@ -113,21 +117,23 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   image: {
-    width: '60%',
-    height: '22%',
+    width: 150,
+    height: 150,
     resizeMode: 'stretch',
     marginVertical: '10%',
+    marginTop: '35%',
   },
   button: {
-    width: '77%',
+    width: '80%',
     justifyContent: 'center',
-    marginTop: '90%',
+    marginTop: '80%',
+    borderRadius: 25,
   },
   error: {
     color: 'red',
     fontWeight: 'bold',
     fontSize: 12,
-    marginVertical: '2%',
+    marginVertical: '6%',
   },
 });
 

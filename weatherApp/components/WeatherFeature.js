@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
-import {Box, Input, Button, Center} from 'native-base';
+
 
 const WeatherFeature = ({iconName, name, value}) => {
   return (
@@ -19,8 +19,7 @@ const styles = StyleSheet.create({
   container: {
    
     flexDirection:'row',
-    // backgroundColor:'red',  
-    padding:'2%' ,
+    padding:'5%' ,
     paddingLeft:'8%' 
   },
 
