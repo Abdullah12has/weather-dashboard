@@ -3,7 +3,6 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Image, SafeAreaView} from 'react-native';
 import {Box, Input, Button} from 'native-base';
 import {useRoute} from '@react-navigation/native';
-import {Icon} from '@rneui/themed';
 
 const WeatherDetailScreen = () => {
   const route = useRoute();
@@ -21,12 +20,12 @@ const WeatherDetailScreen = () => {
             <Text style={styles.temperature}>32°</Text>
             <Text style={styles.description}>Partly Cloudy</Text>
             <Text style={styles.city}>Islamabad</Text>
-            <Text style={styles.feelsLike}>Feels Like 32°</Text>
-            <Icon name="rowing" />
+            <Text style={styles.feelsLike}>32°/ 32° Feels like 32°</Text>
           </View>
 
           <Image source={require('../assets/clear.png')} style={styles.image} />
         </View>
+        <Text>asasas</Text>
       </View>
     </SafeAreaView>
   );
@@ -35,7 +34,6 @@ const WeatherDetailScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     backgroundColor: '#45b6fe',
   },
   containerTop: {
@@ -45,6 +43,7 @@ const styles = StyleSheet.create({
   containerLeft: {
     paddingLeft: '8%',
     paddingTop: '7%',
+    width:'50%'
   },
   temperature: {
     fontSize: 70,
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
     height: 130,
     resizeMode: 'stretch',
     marginVertical: '5%',
-    marginLeft: '23%',
+    marginLeft: '10%',
   },
   button: {
     width: '77%',
@@ -81,6 +80,7 @@ const styles = StyleSheet.create({
   feelsLike: {
     fontSize: 13,
     color: 'white',
+    marginTop: 5,
   },
 });
 
