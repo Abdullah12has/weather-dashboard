@@ -22,36 +22,36 @@ Make sure you have Node.js, yarn, and React Native CLI installed on your machine
 
 1. Clone the repository:
 
-\```javascript
+```javascript
 git clone https://github.com/Abdullah12has/weather-dashboard.git
-\```
+```
 
 2. Navigate into the project directory:
 
-\```javascript 
+```javascript 
 cd WeatherApp
-\```
+```
 
 3. Install the dependencies:
 
-\```javascript
+```javascript
 yarn install
 cd ios 
 pod install
-\```
+```
 
 ### Running the App on IOS
 
 
-\```javascript
+```javascript
 yarn run ios
-\```
+```
 
 - To run the app on Android, run:
 
-\```javascript
+```javascript
 yarn run android
-\```
+```
 
 
 ## Built With
